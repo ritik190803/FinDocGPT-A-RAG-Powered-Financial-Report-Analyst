@@ -1,0 +1,20 @@
+# Virtual Environment
+venv/
+.venv/
+ENV/
+
+# Sensitive Data / API Keys
+*.env
+.env
+
+# Large Project Data Files (Keep raw/processed files local)
+data/raw_filings/
+data/raw_fillings/
+data/chroma_db/
+*.jsonl
+*.pdf
+
+# Python System Caches
+__pycache__/
+*.pyc
+.pytest_cache/
