@@ -2,7 +2,7 @@
 venv/
 .venv/
 ENV/
-
+/node_modules
 # Sensitive Data / API Keys
 *.env
 .env
