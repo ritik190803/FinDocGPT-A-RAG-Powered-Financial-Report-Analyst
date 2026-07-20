@@ -1,0 +1,123 @@
+<div class="app-container">
+  
+  <!-- Modern Modular Sidebar Component -->
+  <app-sidebar 
+    [sessionModel]="sessionModel" 
+    [vectorDb]="vectorDb" 
+    [responseTime]="responseTime">
+  </app-sidebar>
+
+  <!-- Workspace Space Container -->
+  <main class="main-content">
+    <header class="app-header">
+      <div>
+        <h1>FinDocGPT </h1>
+        <p>AI Financial Report Intelligence Platform</p>
+      </div>
+      <button class="theme-toggle">🌙 Theme</button>
+    </header>
+
+    <section class="chat-workspace" #scrollWorkspace>
+      <div class="welcome-container" *ngIf="messages.length === 0">
+        <div class="welcome-icon">📊</div>
+        <h2>Analyze SEC 10-K Filings Instantly</h2>
+        <p>Ask deep financial questions across indexed corporation profiles.</p>
+      </div>
+
+      <!-- Dialogue Conversational Iteration -->
+      <ng-container *ngFor="let msg of messages">
+        
+        <!-- User Turn Block -->
+        <div class="message-row user" *ngIf="msg.role === 'user'">
+          <div class="avatar">👤</div>
+          <div class="bubble">
+            <p>{{ msg.content }}</p>
+            <!-- User Timestamp -->
+            <div class="timestamp">{{ msg.timestamp | date:'shortTime' }}</div>
+          </div>
+        </div>
+
+        <!-- Assistant Turn Block -->
+        <div class="message-row assistant" *ngIf="msg.role === 'assistant'">
+          <div class="avatar">🤖</div>
+          <div class="bubble">
+            
+            <!-- Phase 6: Animated RAG Pipeline Timeline (Visible while loading) -->
+            <div class="rag-timeline-container" *ngIf="msg.isLoading">
+              <p class="timeline-status">Executing RAG Pipeline...</p>
+              <div class="rag-timeline">
+                <div class="step pulse">
+                  <div class="step-icon">🔢</div>
+                  <span class="step-label">Embedding Query</span>
+                </div>
+                <div class="connector connector-1"></div>
+                <div class="step pulse delay-1">
+                  <div class="step-icon">🔍</div>
+                  <span class="step-label">Vector Search</span>
+                </div>
+                <div class="connector connector-2"></div>
+                <div class="step pulse delay-2">
+                  <div class="step-icon">📚</div>
+                  <span class="step-label">Retrieving Chunks</span>
+                </div>
+                <div class="connector connector-3"></div>
+                <div class="step pulse delay-3">
+                  <div class="step-icon">🤖</div>
+                  <span class="step-label">LLM Generation</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Error Panel -->
+            <div class="error-panel" *ngIf="msg.error">⚠️ {{ msg.error }}</div>
+
+            <!-- Parsed HTML Content Output -->
+            <div class="markdown-body" *ngIf="msg.parsedContent" [innerHTML]="msg.parsedContent"></div>
+
+            <!-- Enhanced Sources Area -->
+            <div class="sources-container" *ngIf="msg.sources && msg.sources.length > 0">
+              <h4><span class="icon">📚</span> Verified Sources</h4>
+              <div class="sources-grid">
+                <div class="source-card" *ngFor="let s of msg.sources" (click)="viewSourceContext(s)">
+                  <div class="source-header">
+                    <span class="company-badge">📄 {{ s.company }}</span>
+                    <span class="confidence">Score: {{ s.confidence || '92' }}%</span>
+                  </div>
+                  <div class="source-details">
+                    <span class="page-badge">FY {{ s.fiscal_year }}</span>
+                    <span class="dot">•</span>
+                    <span class="page-badge">Page {{ s.page_number }}</span>
+                  </div>
+                  <div class="source-action">
+                    <span>View Context</span><span class="arrow">&rarr;</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Phase 7: Export Footer & Timestamp (Visible after loading finishes) -->
+            <div class="message-footer" *ngIf="!msg.isLoading">
+              <div class="message-actions">
+                <button class="action-btn" (click)="copyText(msg.content)" title="Copy Text">📋 Copy</button>
+                <button class="action-btn" (click)="downloadMarkdown(msg.content)" title="Download Markdown">⬇️ MD</button>
+                <button class="action-btn" (click)="downloadPDF()" title="Download PDF">📄 PDF</button>
+                <button class="action-btn" (click)="downloadDocx()" title="Download DOCX">📝 DOCX</button>
+              </div>
+              <!-- Assistant Timestamp -->
+              <div class="timestamp">{{ msg.timestamp | date:'shortTime' }}</div>
+            </div>
+
+          </div>
+        </div>
+
+      </ng-container>
+    </section>
+
+    <!-- Modular Custom Chat Input Box -->
+    <app-chat-input 
+      [isLoading]="isLoading" 
+      (sendQuestion)="handleNewQuestion($event)">
+    </app-chat-input>
+
+  </main>
+</div>

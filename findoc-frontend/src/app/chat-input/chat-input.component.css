@@ -1,0 +1,37 @@
+.input-container {
+  padding: 20px;
+  background: var(--bg-primary);
+  border-top: 1px solid var(--border-color);
+}
+
+.input-wrapper {
+  max-width: 850px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  display: flex;
+  padding: 10px;
+}
+
+textarea { 
+  flex: 1; 
+  border: none; 
+  resize: none; 
+  height: 44px; 
+  padding: 12px; 
+  outline: none; 
+  font-family: inherit; 
+}
+
+.send-btn { 
+  background: var(--accent-blue); 
+  color: white; 
+  border: none; 
+  padding: 10px 20px; 
+  border-radius: 8px; 
+  cursor: pointer; 
+}
+
+.send-btn:hover { background: var(--accent-hover); }
+.send-btn:disabled { background: var(--border-color); cursor: not-allowed; }

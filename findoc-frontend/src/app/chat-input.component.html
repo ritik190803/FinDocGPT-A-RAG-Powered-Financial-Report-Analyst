@@ -1,0 +1,14 @@
+<footer class="input-container">
+  <div class="input-wrapper">
+    <textarea 
+      [(ngModel)]="question" 
+      (keydown.enter)="$event.preventDefault(); onSubmit()"
+      placeholder="Ask another question about financial performances..."
+      [disabled]="isLoading">
+    </textarea>
+    <button class="send-btn" (click)"onSubmit()" [disabled]="isLoading || !question.trim()">
+      <span *ngIf="!isLoading">Send</span>
+      <span *ngIf="isLoading">⏳</span>
+    </button>
+  </div>
+</footer>

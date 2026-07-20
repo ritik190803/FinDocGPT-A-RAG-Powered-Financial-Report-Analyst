@@ -1,0 +1,385 @@
+/* ==========================================================================
+   Layout Architecture Setup
+   ========================================================================== */
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: var(--bg-primary);
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.app-header h1 {
+  font-size: 22px;
+  margin: 0;
+  color: var(--text-main);
+}
+
+.app-header p {
+  font-size: 13px;
+  margin: 4px 0 0 0;
+  color: var(--text-muted);
+}
+
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  color: var(--text-main);
+  transition: background-color 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background-color: var(--bg-primary);
+}
+
+/* ==========================================================================
+   Chat Scroll Workspace Stream Viewport
+   ========================================================================== */
+.chat-workspace {
+  flex: 1;
+  overflow-y: auto;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  scroll-behavior: smooth;
+}
+
+.welcome-container {
+  text-align: center;
+  margin: auto;
+  max-width: 450px;
+  color: var(--text-muted);
+}
+
+.welcome-icon {
+  font-size: 50px;
+  margin-bottom: 15px;
+}
+
+.welcome-container h2 {
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.message-row {
+  display: flex;
+  gap: 20px;
+  max-width: 850px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.message-row.user {
+  justify-content: flex-start;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.message-row.user .avatar {
+  background: #dbeafe;
+}
+
+.message-row.assistant .avatar {
+  background: #e2e8f0;
+}
+
+.bubble {
+  flex: 1;
+  background: var(--bg-card);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
+}
+
+.message-row.user .bubble {
+  background: #f1f5f9;
+}
+
+.markdown-body {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-main);
+}
+
+/* Message Timestamp */
+.timestamp {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: right;
+  margin-top: 10px;
+  opacity: 0.8;
+}
+
+/* ==========================================================================
+   Phase 4: Enhanced Clickable Source Cards
+   ========================================================================== */
+.sources-container {
+  margin-top: 20px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 15px;
+}
+
+.sources-container h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-main);
+  font-size: 14px;
+  margin: 0 0 15px 0;
+}
+
+.sources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.source-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.source-card:hover {
+  border-color: var(--accent-blue);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+  transform: translateY(-2px);
+}
+
+.source-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.company-badge {
+  font-weight: 600;
+  color: var(--text-main);
+  font-size: 14px;
+}
+
+.confidence {
+  font-size: 11px;
+  background: #dcfce7;
+  color: #166534;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.source-details {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.source-details .dot {
+  color: #cbd5e1;
+}
+
+.source-action {
+  margin-top: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-blue);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.source-action .arrow {
+  transition: transform 0.2s;
+}
+
+.source-card:hover .source-action .arrow {
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   Phase 6: RAG Pipeline Timeline Animations
+   ========================================================================== */
+.rag-timeline-container {
+  padding: 15px 0;
+}
+
+.timeline-status {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-blue);
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.rag-timeline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 600px;
+  position: relative;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  z-index: 2;
+  opacity: 0.4;
+}
+
+.step-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--bg-primary);
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.step-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.connector {
+  flex: 1;
+  height: 2px;
+  background: var(--border-color);
+  margin: 0 10px;
+  position: relative;
+  top: -10px;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.pulse {
+  animation: activateStep 2s infinite alternate;
+}
+
+.delay-1 { animation-delay: 0.5s; }
+.delay-2 { animation-delay: 1s; }
+.delay-3 { animation-delay: 1.5s; }
+
+@keyframes activateStep {
+  0% { opacity: 0.4; transform: scale(1); }
+  100% { opacity: 1; transform: scale(1.05); }
+}
+
+.connector::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--accent-blue);
+  animation: flowLine 2s infinite linear;
+}
+
+.connector-1::after { animation-delay: 0s; }
+.connector-2::after { animation-delay: 0.5s; }
+.connector-3::after { animation-delay: 1s; }
+
+@keyframes flowLine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* ==========================================================================
+   Phase 7: Message Export Footer & Actions
+   ========================================================================== */
+.message-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 12px;
+}
+
+.message-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.action-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.action-btn:hover {
+  background: #f1f5f9;
+  color: var(--accent-blue);
+  border-color: var(--accent-blue);
+  transform: translateY(-1px);
+}
+
+.message-footer .timestamp {
+  margin-top: 0;
+}
+
+.error-panel {
+  color: #dc2626;
+  background: #fef2f2;
+  border: 1px solid #fee2e2;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 14px;
+}
