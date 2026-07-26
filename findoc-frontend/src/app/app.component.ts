@@ -48,6 +48,19 @@ export class AppComponent implements AfterViewChecked {
     } catch(err) { }
   }
 
+
+// --- Phase 8: Theme Management ---
+  isDarkMode: boolean = false;
+
+  toggleTheme() {
+    this.isDarkMode = !this.isDarkMode;
+    if (this.isDarkMode) {
+      document.body.classList.add('dark-theme');
+    } else {
+      document.body.classList.remove('dark-theme');
+    }
+  }
+
   handleNewQuestion(questionText: string) {
     this.isLoading = true;
 

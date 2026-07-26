@@ -10,11 +10,18 @@
   <!-- Workspace Space Container -->
   <main class="main-content">
     <header class="app-header">
-      <div>
-        <h1>FinDocGPT </h1>
+      <div class="header-branding">
+        <h1>FinDocGPT <span class="pro-badge">PRO</span></h1>
         <p>AI Financial Report Intelligence Platform</p>
       </div>
-      <button class="theme-toggle">🌙 Theme</button>
+      
+      <!-- Added Theme Toggle Button Here -->
+      <div class="header-actions">
+        <button class="theme-btn" (click)="toggleTheme()" [title]="isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
+          <span class="icon">{{ isDarkMode ? '☀️' : '🌙' }}</span>
+          <span class="text">{{ isDarkMode ? 'Light' : 'Dark' }}</span>
+        </button>
+      </div>
     </header>
 
     <section class="chat-workspace" #scrollWorkspace>
