@@ -1,14 +1,22 @@
 <div class="app-container">
   
   <!-- Modern Modular Sidebar Component -->
+  <!-- Modern Modular Sidebar Component -->
   <app-sidebar 
     [sessionModel]="sessionModel" 
     [vectorDb]="vectorDb" 
-    [responseTime]="responseTime">
+    [responseTime]="responseTime"
+    [sessions]="sessions"
+    [activeSessionId]="activeSessionId"
+    (newChat)="startNewChat()"
+    (selectSession)="loadSpecificSession($event)"
+    (deleteSessionEvent)="deleteSpecificSession($event)" 
+    (clearHistoryEvent)="clearAllHistory()">
   </app-sidebar>
 
-  <!-- Workspace Space Container -->
+  
   <main class="main-content">
+
     <header class="app-header">
       <div class="header-branding">
         <h1>FinDocGPT <span class="pro-badge">PRO</span></h1>

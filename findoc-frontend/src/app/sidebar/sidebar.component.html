@@ -1,25 +1,39 @@
 <aside class="sidebar">
   <div class="sidebar-header">
     <div class="logo">📄 FinDocGPT</div>
+    <!-- New Chat Button -->
+    <button class="new-chat-btn" (click)="startNewChat()">
+      <span class="icon">➕</span> New Chat
+    </button>
   </div>
   
-  <div class="sidebar-section">
-    <h3>System Metadata</h3>
-    <div class="meta-item">
-      <span class="label">LLM Engine:</span>
-      <span class="value">{{ sessionModel }}</span>
-    </div>
-    <div class="meta-item">
-      <span class="label">Vector DB:</span>
-      <span class="value">{{ vectorDb }}</span>
-    </div>
-    <div class="meta-item" *ngIf="responseTime !== '0.00 s'">
-      <span class="label">Latency:</span>
-      <span class="value highlight">{{ responseTime }}</span>
+  <!-- Scrollable History List -->
+  <!-- Scrollable History List -->
+  <div class="sidebar-history" *ngIf="sessions.length > 0">
+    <h3 class="history-title">Recent Chats</h3>
+    <div class="session-item" 
+         *ngFor="let s of sessions" 
+         [class.active]="s.id === activeSessionId"
+         (click)="loadSession(s.id)">
+      
+      <span class="session-title">💬 {{ s.title }}</span>
+      <button class="delete-icon" (click)="onDeleteSession($event, s.id)" title="Delete Chat">✖</button>
+      
     </div>
   </div>
 
+  
   <div class="sidebar-footer">
-    <div class="status-indicator">● RAG Pipeline Active</div>
+    <div class="sidebar-section">
+      <h3>Metadata</h3>
+      <div class="meta-item"><span class="label">LLM Engine:</span><span class="value">{{ sessionModel }}</span></div>
+      <div class="meta-item"><span class="label">Vector DB:</span><span class="value">{{ vectorDb }}</span></div>
+      <div class="meta-item" *ngIf="responseTime !== '0.00 s'"><span class="label">Latency:</span><span class="value highlight">{{ responseTime }}</span></div>
+    </div>
+
+    <!-- Clear All Button (Fixed click event) -->
+    <button class="clear-chat-btn" (click)="clearHistory()" *ngIf="sessions.length > 0">
+      🗑️ Clear History
+    </button>
   </div>
 </aside>
