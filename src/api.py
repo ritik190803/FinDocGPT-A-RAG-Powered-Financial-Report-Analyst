@@ -1,35 +1,30 @@
-# src/api.py
-
 import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
 
-# Import your working pipeline
+# Import working pipeline
 from rag_pipeline import FinancialRAGPipeline
 
-# Initialize the application
+# Initialize application
 app = FastAPI(
     title="FinDocGPT Engine", 
     description="RAG-powered API for financial document analysis",
     version="1.0.0"
 )
 
-# Advanced Security: Configure CORS to exclusively allow your Angular local development server
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:4200"], # Standard port for Angular CLI
+    allow_origins=["http://localhost:4200"],
     allow_credentials=True,
     allow_methods=["POST", "OPTIONS"],
     allow_headers=["*"],
 )
 
-# Load the AI pipeline into memory once when the server starts
 print("Booting up RAG Engine...")
 rag_engine = FinancialRAGPipeline()
 
-# Define strict Pydantic data models for request/response validation
 class ChatRequest(BaseModel):
     question: str
 
@@ -49,18 +44,15 @@ async def ask_question(request: ChatRequest):
     print("API ENDPOINT HIT")
     print("Question:", request.question)
     print("=" * 80)
-    """
-    Receives a natural language question, processes it through the local vector DB 
-    and Groq LLM, and returns a structured analysis with distinct citations.
-    """
+
     try:
         if not request.question.strip():
             raise HTTPException(status_code=400, detail="Question cannot be empty.")
             
-        # Execute the RAG pipeline
+        # Execute RAG pipeline (retrieves top 10 chunks now)
         result = rag_engine.query(request.question)
         
-        # Deduplicate sources so the frontend doesn't show identical citation tags
+        # Deduplicate sources for UI rendering
         unique_sources = []
         seen = set()
         
@@ -71,8 +63,8 @@ async def ask_question(request: ChatRequest):
                 unique_sources.append(
                     SourceData(
                         company=meta['company'],
-                        fiscal_year=meta['fiscal_year'],
-                        page_number=meta['page_number']
+                        fiscal_year=str(meta['fiscal_year']),
+                        page_number=int(meta['page_number'])
                     )
                 )
                 
@@ -86,5 +78,4 @@ async def ask_question(request: ChatRequest):
         raise HTTPException(status_code=500, detail="Internal Server Error during AI generation.")
 
 if __name__ == "__main__":
-    # Runs the server asynchronously on port 8000
     uvicorn.run("api:app", host="127.0.0.1", port=8000, reload=True)
