@@ -7,7 +7,7 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 # Import working pipeline
-from rag_pipeline import FinancialRAGPipeline
+from src.rag_pipeline import FinancialRAGPipeline
 
 # Initialize application
 app = FastAPI(
