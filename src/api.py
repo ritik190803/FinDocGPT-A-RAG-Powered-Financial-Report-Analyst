@@ -3,22 +3,22 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
-
+import os
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 # Import working pipeline
 from rag_pipeline import FinancialRAGPipeline
 
 # Initialize application
 app = FastAPI(
-    title="FinDocGPT Engine", 
-    description="RAG-powered API for financial document analysis",
-    version="1.0.0"
+    title="FinDocGPT Engine"
 )
-
+frontend_url = os.getenv("FRONTEND_URL", "*")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:4200"],
+    allow_origins=["http://localhost:4200", frontend_url, "*"],
     allow_credentials=True,
-    allow_methods=["POST", "OPTIONS"],
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 

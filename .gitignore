@@ -1,20 +1,57 @@
-# Virtual Environment
+# ==========================================
+# 1. Python & Virtual Environments
+# ==========================================
 venv/
 .venv/
 ENV/
-/node_modules
-# Sensitive Data / API Keys
-*.env
-.env
-
-# Large Project Data Files (Keep raw/processed files local)
-data/raw_filings/
-data/raw_fillings/
-data/chroma_db/
-*.jsonl
-*.pdf
-
-# Python System Caches
+env/
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 .pytest_cache/
+
+# Sensitive Environment Variables
+*.env
+.env
+fin_doc_api.env
+
+# Raw Large Data Files (Keep raw source PDFs/JSONL local)
+*.pdf
+*.jsonl
+data/raw_filings/
+data/raw_fillings/
+
+# (Note: data/chroma_db/ is intentionally NOT listed here so Git tracks your embeddings!)
+
+# ==========================================
+# 2. Node.js & Angular (Root & Subfolders)
+# ==========================================
+# Match node_modules anywhere in the repository
+**/node_modules/
+node_modules/
+
+# Match Angular caches and build outputs anywhere in the repository
+**/.angular/
+.angular/
+**/dist/
+dist/
+**/tmp/
+tmp/
+**/out-tsc/
+out-tsc/
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ==========================================
+# 3. System & Editor Files
+# ==========================================
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+.idea/
+.DS_Store
+Thumbs.db
