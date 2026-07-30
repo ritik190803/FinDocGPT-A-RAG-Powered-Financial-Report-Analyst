@@ -19,7 +19,8 @@ export interface ChatResponse {
   providedIn: 'root'
 })
 export class ChatService {
-  private apiUrl = 'http://127.0.0.1:8000/api/ask';
+  // Make sure to keep the /api/ask at the end!
+private apiUrl = 'https://ritik1915-findoc-api.hf.space/api/ask';
 
   // Angular injects the HttpClient dependency here
   constructor(private http: HttpClient) {}
